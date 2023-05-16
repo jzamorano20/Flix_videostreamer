@@ -1,15 +1,23 @@
-const React = require("react");
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React from'react';
+
+import Landing from './Pages/Landing';
+import Dashboard from './Pages/Dashboard';
+import Favorites from './Pages/Favorites';
+import Register from "./Pages/Register";
+
 
 function App() {
-  return (
-		<div className="App" class="bg-gradient-to-r from-white-50 to-gray-500 min-h-screen">
-			<div class="p-2">
-				<div class="bg-black-950 flex rounded-md p-6">
-				<div class=" text-white-50 bg-slate-950 ">Hello, This is our Video APP</div>
-				</div>
 
-			</div>
-    </div>
+  return (
+		<Router>
+    <Routes>
+      <Route path='/' element={<Landing />} />
+      <Route path='/Dashboard' element={<Dashboard />} />
+      <Route path='/favorites' element={<Favorites />} />
+			<Route path='/register' element={<Register />} />
+    </Routes>
+		</Router>
   );
 }
 
