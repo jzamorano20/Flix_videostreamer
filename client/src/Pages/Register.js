@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 
 function Register(props) {
+
 return (
 	<div className='flex flex-wrap justify center mt-20'>
 		<div className='w-full max-w-small'>
@@ -39,6 +40,7 @@ return (
 			</div>
 			</div>
   )
+
 }
 
 export default Register;
