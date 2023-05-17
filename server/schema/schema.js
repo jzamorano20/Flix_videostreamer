@@ -14,7 +14,7 @@ const {
 const UserType = new GraphQLObjectType({
   name: "User",
   fields: () => ({
-    _id: { type: GraphQLID },
+    id: { type: GraphQLID },
     username: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
@@ -47,7 +47,7 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    addUser: {
+    registerUser: {
       type: UserType,
       args: {
         username: { type: GraphQLString },
