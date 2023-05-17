@@ -16,6 +16,9 @@
     "concurrently": "^8.0.1"
   },
   "dependencies": {
-    "jsonwebtoken": "^9.0.0"
+    "axios": "^1.4.0",
+    "dom": "^0.0.3",
+    "jsonwebtoken": "^9.0.0",
+    "react": "^18.2.0"
   }
 }

@@ -1,21 +1,17 @@
 import { useMutation } from "@apollo/client";
-import { REGISTER_USER } from "../mutations/userMutations";
+import { LOGIN_USER } from "../mutations/userMutations";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Register(props) {
-  const [username, setUsername] = useState("");
+function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [registerUser, { error, loading }] = useMutation(REGISTER_USER);
+  const [loginUser, { error, loading }] = useMutation(LOGIN_USER);
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === "username") {
-      setUsername(value);
-    }
     if (name === "email") {
       setEmail(value);
     }
@@ -26,13 +22,11 @@ function Register(props) {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const username = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    registerUser({
+    loginUser({
       variables: {
-        username,
         email,
         password,
       },
@@ -51,26 +45,10 @@ function Register(props) {
       <div className="w-full max-w-small">
         <form
           className="shadow-md bg-black-300 rounded-sm px-8 pt-6 pb-8 mb-4"
-          onSubmit={handleFormSubmit}
+          // onSubmit={handleFormSubmit}
         >
           <div className="mb-5">
-            <label
-              type="text"
-              className="block text-black-950 text-sm font-bold mb-2"
-            >
-              username
-            </label>
-            <input
-              type="text"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
-              name="username"
-              placeholder="Enter a username"
-              value={username}
-              onChange={handleOnChange}
-            />
-
-            <label
+           <label
               type="email"
               className="block text-black-950 text-sm font-bold mb-2"
             >
@@ -81,7 +59,7 @@ function Register(props) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               name="email"
-              placeholder="Enter a email"
+              placeholder="Enter your email address"
               value={email}
               onChange={handleOnChange}
             />
@@ -96,17 +74,17 @@ function Register(props) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               name="password"
-              placeholder="Enter a password"
+              placeholder="Enter your password"
               value={password}
-              onChange={handleOnChange}
+            	 onChange={handleOnChange}
             />
           </div>
           <div>
             <button
               className="bg-black-600 hover:bg-white-50 text-white-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
-            >
-              {loading ? "Registering User..." : "Register"}
+            >Login
+             {loading ? "Logging in..." : "Login"}
             </button>
             {error && <p className="text-red-500">{error.message}</p>}
           </div>
@@ -116,4 +94,4 @@ function Register(props) {
   );
 }
 
-export default Register;
+export default Login;
