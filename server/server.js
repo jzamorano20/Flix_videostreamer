@@ -4,6 +4,14 @@ const db = require("./config/connection");
 const session = require("express-session");
 const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
+
+const { google } = require('googleapis');
+const apiKey = 'AIzaSyA4IdtHa6cF1nREH17tKAkn7uzyAjMVGTc';
+const baseApiUrl = 'https://youtube.googleapis.com/youtube/v3';
+const youtube = google.youtube({
+  version: 'v3',
+  auth: apiKey,
+})
 // const resolvers = require("./schema/resolvers");
 const cors = require("cors");
 
@@ -29,6 +37,24 @@ app.use(
 app.listen(PORT, () => {
   console.log(`Express server running on port ${PORT}`);
   console.log(`GraphQL server waiting at /graphql`);
+});
+
+
+// Youtube Api
+app.get("/search-with-googleapis", async (req, res) => {
+  try {
+  const searcQuery = req.query.search_query;
+  // const url = `${baseApiURl}/search?key=${apiKey}%type=video&part=snippet&q=${searcQuery}`;
+  const response = await youtube.search.list({
+    part: 'snippet',
+    q: searcQuery,
+    type: 'video',
+  });
+  const titles = response.data.items.map((item) => item.snippet.title);
+  res.send(titles);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // const { ApolloServer } = require("@apollo/server");
