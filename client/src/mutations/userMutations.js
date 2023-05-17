@@ -20,7 +20,6 @@ mutation loginUser(
 {
 	loginUser(email: $email, password: $password){
 		email
-		password
 	}
 }`
 export { REGISTER_USER };
