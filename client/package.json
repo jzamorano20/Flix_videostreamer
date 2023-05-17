@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
- 
+
   "dependencies": {
     "@apollo/client": "^3.7.14",
     "@headlessui/react": "^1.7.14",
@@ -20,7 +20,7 @@
     "webpack": "^4.19.1"
   },
   "scripts": {
-    "start": "GENERATE_SOURCEMAP=false react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
