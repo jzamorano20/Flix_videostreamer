@@ -1,6 +1,6 @@
 import React from "react";
 
-function Landing() {
+function Dashboard() {
   return (
     <div>
 
@@ -23,4 +23,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default Dashboard;
