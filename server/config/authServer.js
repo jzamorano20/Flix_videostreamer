@@ -1,43 +1,35 @@
-require('dotenv').config()
+const jwt = require('jsonwebtoken');
 
-const express = require('express')
-const app = express()
-const jwt = require('jsonwebtoken')
+const secret = 'mysecretssshhhhhhh';
+const expiration = '2h';
 
-app.use(express.json())
+module.exports = {
+  authMiddleware: function ({ req }) {
+    // allows token to be sent via req.body, req.query, or headers
+    let token = req.body.token || req.query.token || req.headers.authorization;
 
-let refreshTokens = []
+    // We split the token string into an array and return actual token
+    if (req.headers.authorization) {
+      token = token.split(' ').pop().trim();
+    }
 
-app.post('/token', (req, res) => {
-  const refreshToken = req.body.token
-  if (refreshToken == null) return res.sendStatus(401)
-  if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403)
-    const accessToken = generateAccessToken({ name: user.name })
-    res.json({ accessToken: accessToken })
-  })
-})
+    if (!token) {
+      return req;
+    }
 
-app.delete('/logout', (req, res) => {
-  refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-  res.sendStatus(204)
-})
+    // if token can be verified, add the decoded user's data to the request so it can be accessed in the resolver
+    try {
+      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      req.user = data;
+    } catch {
+      console.log('Invalid token');
+    }
 
-app.post('/login', (req, res) => {
-  // Authenticate User
-
-  const username = req.body.username
-  const user = { name: username }
-
-  const accessToken = generateAccessToken(user)
-  const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-  refreshTokens.push(refreshToken)
-  res.json({ accessToken: accessToken, refreshToken: refreshToken })
-})
-
-function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
-}
-
-app.listen(3000)
+    // return the request object so it can be passed to the resolver as `context`
+    return req;
+  },
+  signToken: function ({ email, name, _id }) {
+    const payload = { email, name, _id };
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+  },
+};
