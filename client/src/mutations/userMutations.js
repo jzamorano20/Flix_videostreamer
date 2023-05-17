@@ -19,6 +19,7 @@ mutation loginUser(
 )
 {
 	loginUser(email: $email, password: $password){
+
 		email
 	}
 }`
