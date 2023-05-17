@@ -1,52 +1,45 @@
-// import { useMutation } from "@apollo/client";
-// import { REGISTER_USER } from "../mutations/userMutations";
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-import React from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../mutations/userMutations";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-// function Register(props) {
-//   const [username, setUsername] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const navigate = useNavigate();
-//   const [registerUser, { error, loading }] = useMutation(REGISTER_USER);
+function Login(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [loginUser, { error, loading }] = useMutation(LOGIN_USER);
 
-//   const handleOnChange = (event) => {
-//     const { name, value } = event.target;
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
 
-//     if (name === "username") {
-//       setUsername(value);
-//     }
-//     if (name === "email") {
-//       setEmail(value);
-//     }
-//     if (name === "password") {
-//       setPassword(value);
-//     }
-//   };
+    if (name === "email") {
+      setEmail(value);
+    }
+    if (name === "password") {
+      setPassword(value);
+    }
+  };
 
-//   const handleFormSubmit = (event) => {
-//     event.preventDefault();
-//     const username = event.target.username.value;
-//     const email = event.target.email.value;
-//     const password = event.target.password.value;
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
 
-//     registerUser({
-//       variables: {
-//         username,
-//         email,
-//         password,
-//       },
-//     })
-//       .then((data) => {
-//         console.log(data);
-//         navigate("/dashboard");
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-function Login() {
+    loginUser({
+      variables: {
+        email,
+        password,
+      },
+    })
+      .then((data) => {
+        console.log(data);
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="flex flex-wrap justify center mt-20">
       <div className="w-full max-w-small">
@@ -67,8 +60,8 @@ function Login() {
               id="email"
               name="email"
               placeholder="Enter your email address"
-              // value={email}
-              // onChange={handleOnChange}
+              value={email}
+              onChange={handleOnChange}
             />
             <label
               type="text"
@@ -82,8 +75,8 @@ function Login() {
               id="password"
               name="password"
               placeholder="Enter your password"
-              // value={password}
-              // onChange={handleOnChange}
+              value={password}
+            	 onChange={handleOnChange}
             />
           </div>
           <div>
@@ -91,9 +84,9 @@ function Login() {
               className="bg-black-600 hover:bg-white-50 text-white-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >Login
-             {/* {loading ? "Registering User..." : "Register"} */}
+             {loading ? "Logging in..." : "Login"}
             </button>
-            {/* {error && <p className="text-red-500">{error.message}</p>} */}
+            {error && <p className="text-red-500">{error.message}</p>}
           </div>
         </form>
       </div>
