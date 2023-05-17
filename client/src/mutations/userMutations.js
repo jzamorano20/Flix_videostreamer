@@ -22,4 +22,4 @@ mutation loginUser(
 		email
 	}
 }`
-export { REGISTER_USER };
+export { REGISTER_USER, LOGIN_USER };
