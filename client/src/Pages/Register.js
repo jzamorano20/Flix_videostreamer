@@ -65,7 +65,7 @@ function Register(props) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               name="username"
-              placeholder="username"
+              placeholder="Enter a username"
               value={username}
               onChange={handleOnChange}
             />
@@ -81,7 +81,7 @@ function Register(props) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               name="email"
-              placeholder="email"
+              placeholder="Enter a email"
               value={email}
               onChange={handleOnChange}
             />
@@ -96,7 +96,7 @@ function Register(props) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               name="password"
-              placeholder="password"
+              placeholder="Enter a password"
               value={password}
               onChange={handleOnChange}
             />
