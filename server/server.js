@@ -7,11 +7,13 @@ const schema = require("./schema/schema");
 // const resolvers = require("./schema/resolvers");
 const cors = require("cors");
 const PORT = process.env.PORT || 3333;
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("../client/dist"));
 app.use(cors());
+
 db.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
@@ -71,6 +73,7 @@ app.listen(PORT, () => {
 //   console.log("Express server running on port %s", PORT);
 //   console.log("GraphQL server waiting at /graphql");
 // });
+
 
 
 
