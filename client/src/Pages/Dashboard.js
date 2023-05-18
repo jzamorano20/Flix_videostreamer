@@ -44,6 +44,7 @@ function YouTubeSearch() {
     try {
       const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${apiKey}`);
       setVideos(response.data.items);
+      console.log(response.data)
     } catch (error) {
       console.error('Error fetching videos:', error);
     }
@@ -63,13 +64,14 @@ function YouTubeSearch() {
       {videos.map((video) => (
         <div key={video.id.videoId} onClick={() => handleVideoSelect(video.id.videoId)}>
           <h2>{video.snippet.title}</h2>
+          <img onClick={ () => handleVideoSelect (video.id.videoId)} src={video.snippet.thumbnails.default.url} alt={video.snippet.title} />
+          
         </div>
       ))}
 
       {selectedVideo && (
         <iframe
-          width="560"
-          height="315"
+          
           src={`https://www.youtube.com/embed/${selectedVideo}`}
           title="Selected Video"
           allowFullScreen
