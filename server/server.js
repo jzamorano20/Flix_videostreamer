@@ -12,6 +12,10 @@ const youtube = google.youtube({
   auth: apiKey,
 })
 
+
+// const resolvers = require("./schema/resolvers");
+const cors = require("cors");
+
 const PORT = process.env.PORT || 3333;
 const app = express();
 
