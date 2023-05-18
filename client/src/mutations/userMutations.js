@@ -7,20 +7,20 @@ const REGISTER_USER = gql`
     $password: String!
   ) {
     registerUser(username: $username, email: $email, password: $password) {
+      id
       username
       email
     }
   }
 `;
 const LOGIN_USER = gql`
-mutation loginUser(
-	$email: String!
-	$password: String!
-)
-{
-	loginUser(email: $email, password: $password){
+    mutation loginUser($email: String!, $password: String!) {
+      loginUser(email: $email, password: $password) {
+        username
+        email
+      }
+    }
+  `;
 
-		email
-	}
-}`
+
 export { REGISTER_USER, LOGIN_USER };
