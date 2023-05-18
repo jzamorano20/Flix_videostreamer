@@ -1,11 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function Dashboard() {
   return (
     <div>
-
-
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-white-50 bg-black-950 rounded-md p-6">
@@ -16,7 +14,9 @@ function Dashboard() {
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>
+            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
+              <YouTubeSearch />
+            </div>
           </div>
         </div>
       </main>
@@ -27,6 +27,7 @@ function Dashboard() {
 function YouTubeSearch() {
   const [searchQuery, setSearchQuery] = useState('');
   const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   const handleChange = (event) => {
     setSearchQuery(event.target.value);
@@ -39,14 +40,17 @@ function YouTubeSearch() {
 
   const fetchVideos = async () => {
     const apiKey = "AIzaSyBzkrecHSWUAC9ByRbuTzo1bZo1JHlVIQ0"; // Replace with your own API key
-    const data = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${apiKey}`)
-    console.log(data);
-    // fetch(
-    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${apiKey}`
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => setVideos(data.items))
-    //   .catch((error) => console.error('Error fetching videos:', error));
+
+    try {
+      const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${apiKey}`);
+      setVideos(response.data.items);
+    } catch (error) {
+      console.error('Error fetching videos:', error);
+    }
+  };
+
+  const handleVideoSelect = (videoId) => {
+    setSelectedVideo(videoId);
   };
 
   return (
@@ -57,20 +61,22 @@ function YouTubeSearch() {
       </form>
 
       {videos.map((video) => (
-        <div key={video.id.videoId}>
+        <div key={video.id.videoId} onClick={() => handleVideoSelect(video.id.videoId)}>
           <h2>{video.snippet.title}</h2>
-          <iframe
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/embed/${video.id.videoId}`}
-            title={video.snippet.title}
-            allowFullScreen
-          ></iframe>
         </div>
       ))}
+
+      {selectedVideo && (
+        <iframe
+          width="560"
+          height="315"
+          src={`https://www.youtube.com/embed/${selectedVideo}`}
+          title="Selected Video"
+          allowFullScreen
+        ></iframe>
+      )}
     </div>
   );
 }
 
-// export default YouTubeSearch;
 export default Dashboard;
