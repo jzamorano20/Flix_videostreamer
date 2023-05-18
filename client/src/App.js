@@ -7,10 +7,12 @@ import Favorites from "./Pages/Favorites";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 
+
 const client = new ApolloClient({
   uri: "http://localhost:3333/graphql",
   cache: new InMemoryCache(),
 });
+
 
 function App() {
   return (
