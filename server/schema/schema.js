@@ -1,4 +1,5 @@
 const userSchema = require("../models/User");
+const bcrypt = require('bcrypt');
 
 const {
   GraphQLObjectType,
@@ -92,10 +93,45 @@ const Mutation = new GraphQLObjectType({
         );
       },
     },
+    loginUser: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+      },
+      async resolve(parent, args) {
+        const user = await userSchema.findOne({ email: args.email });
+        if (!user) {
+          throw new Error("User does not exist");
+        }
+        const valid = await bcrypt.compare(args.password, user.password);
+        if (!valid) {
+          throw new Error("Invalid password");
+        }
+        return user;
+      }
+    },
   },
-});
 
-//==================================================
+});
+// registerUser: {
+//   type: UserType,
+//   args: {
+//     username: { type: GraphQLString },
+//     email: { type: GraphQLString },
+//     password: { type: GraphQLString },
+//   },
+//   resolve(parent, args) {
+//     let user = new userSchema({
+//       username: args.username,
+//       email: args.email,
+//       password: args.password,
+//     });
+//     return user.save();
+//   },
+// }
+
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
   mutation: Mutation,
