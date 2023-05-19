@@ -1,26 +1,73 @@
-# Flix_videostreamer
 
-## Description 
+# Flix videostreamer
 
 This is a application that allows the user to create a account, login in, and be able to search for any video. The user will see multiple videos on the dashboad and also see a search button. Using the search button and typing anything a video will then pop up based on their search name. This application was built with React, Graphql, and CSS.
 
+
 ## Installation
 
-One must get the code and in the Terminal type npm install to get all the dependencies. From there run the command npm run develop to be able to see the pages and the application.
+Install my-project with npm
 
-## Usage 
+```bash
+  npm install 
 
-    1. Make a account with email and password
-    2. You will then be broght to the dashboard
-    3. In the Search Bar type any topic and a video will pop up
-    4. Click on the desired video of choice
-    5. Video will then get bigger and play in the middle of the screen.
+```
+    
+## Deployment
+
+To deploy this project run
+
+```bash
+  npm run develop
+```
 
 
-## Link to Deployment 
+## Tech Stack
 
-https://github.com/jzamorano20/Flix_videostreamer
+**Client:** React, TailwindCSS
 
-## License 
+**Server:** Express, GraphQL, Mongoose, Dom, Axios
 
-- [License: MIT]
+
+## Badges
+
+Add badges from somewhere like: [shields.io](https://shields.io/)
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+
+
+## API Reference
+
+#### Get all items
+
+```http
+  https://www.googleapis.com/youtube/v3
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. Your API key |
+
+
+
+
+## Documentation
+
+ React [Documentation](https://create-react-app.dev/docs/getting-started/)
+
+ GraphQl [Documentation](https://graphql.org/learn/)
+
+Yotube Api [Documentation](https://developers.google.com/youtube/v3/docs)
+## Authors
+
+- [jzamorano20](https://github.com/jzamorano20)
+- [mhgarry](https://github.com/mhgarry)
+- [kenneilsmith](https://github.com/kenneilsmith)
+- [MizaelG](https://github.com/MizaelG)
+
+
+## Screenshots
+
+![App Screenshot]()
+
