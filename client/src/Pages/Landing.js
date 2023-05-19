@@ -11,7 +11,7 @@ function Landing() {
 
   const fetchRandomVideo = async () => {
     try {
-      const apiKey = "AIzaSyAk9YQqZtd9Nt1DX2lXx-Jr-6TNqRCU7QM";
+      const apiKey = "AIzaSyDrCbCZLcthWmVVy_2rRuIyThmYlhJtEZQ";
       const searchQuery = "rick roll";
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${apiKey}`
@@ -74,13 +74,15 @@ function Landing() {
             Welcome to FLIX. Your premier YouTube streaming application minus the advertisements.
           </p>
           {videoId && (
-            <div className="aspect-w-16 aspect-h-9">
-              <iframe
-                title="Random YouTube Video"
-                className="w-full h-full"
-                src={`https://www.youtube.com/embed/${videoId}`}
-                allowFullScreen
-              ></iframe>
+            <div className="aspect-w-16 aspect-h-9 flex justify-center items-center">
+              <div className="aspect-video-container">
+                <iframe
+                  title="Random YouTube Video"
+                  className="aspect-video"
+                  src={`https://www.youtube.com/embed/${videoId}`}
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
           )}
         </div>

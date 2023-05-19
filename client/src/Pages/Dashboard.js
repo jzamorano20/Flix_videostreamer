@@ -3,10 +3,10 @@ import axios from 'axios';
 
 function Dashboard() {
   return (
-    <div className="min-h-screen w-full items-center justify-center bg-gradient-to-tr from-black-800 to-white-50 text-white-50">
+    <div>
       <header className="bg-white shadow">
         <div className="vw-screen mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-white-50 bg-black-950 rounded-md p-6">
+          <h1 className="text-3xl font-bold text-white-50 bg-black-950 rounded-md p-6 overflow-y-scroll">
             FLIX
           </h1>
         </div>
@@ -14,7 +14,7 @@ function Dashboard() {
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
-            <div className="grow h-screen flex flex-row md:ml-24 bg-black-900 text-white-50 text-opacity-80 overflow-y-scroll">
+            <div className="grow h-screen flex flex-row md:ml-24  bg-black-900 text-white-50 text-opacity-80 overflow-y-scroll">
               <YouTubeSearch />
             </div>
           </div>
@@ -39,7 +39,7 @@ function YouTubeSearch() {
   };
 
   const fetchVideos = async () => {
-    const apiKey = "AIzaSyAk9YQqZtd9Nt1DX2lXx-Jr-6TNqRCU7QM"; // Replace with your own API key
+    const apiKey = "AIzaSyDrCbCZLcthWmVVy_2rRuIyThmYlhJtEZQ"; // Replace with your own API key
 
     try {
       const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${apiKey}`);
@@ -57,9 +57,9 @@ function YouTubeSearch() {
 
   return (
     <div className="grow h-screen flex flex-row flex-wrap md:ml-24 m-default py-5 px-5 bg-black-900 text-gray-700 text-opacity-80 justify-between w-full">
-      <form className="justify-center px-5" onSubmit={handleSubmit}>
+      <form className="justify-center" onSubmit={handleSubmit}>
         <input type="text" value={searchQuery} onChange={handleChange} />
-        <button className="px-2 rounded-m bg-black-400" type="submit">Search</button>
+        <button className="rounded-m bg-black-400" type="submit">Search</button>
       </form>
       <div className={`w-1/2 flex flex-col text-black-950 transition-all duration-500 ${selectedVideo ? 'hidden' : 'block'}`}>
         {videos.map((video) => (
