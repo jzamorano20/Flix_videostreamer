@@ -39,7 +39,7 @@ function YouTubeSearch() {
   };
 
   const fetchVideos = async () => {
-    const apiKey = ""; // Replace with your own API key
+		const apiKey = process.env.REACT_APP_API_KEY; // Replace with your own API key
 
     try {
       const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${apiKey}`);
