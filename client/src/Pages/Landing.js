@@ -11,7 +11,7 @@ function Landing() {
 
   const fetchRandomVideo = async () => {
     try {
-      const apiKey = "AIzaSyDrCbCZLcthWmVVy_2rRuIyThmYlhJtEZQ";
+      const apiKey = "";
       const searchQuery = "rick roll";
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${apiKey}`
