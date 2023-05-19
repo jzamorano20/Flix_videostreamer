@@ -68,6 +68,13 @@ Yotube Api [Documentation](https://developers.google.com/youtube/v3/docs)
 
 
 ## Screenshots
+Dashboard Page
+![App Screenshot](./Assets/Dashboard.png)
 
-![App Screenshot]()
+Landing Page
+![laning page](./Assets/Landing.png)
+
+
+Favorites Page
+![Favorites page](./Assets/favorites.png)
 
