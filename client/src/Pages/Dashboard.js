@@ -1,20 +1,53 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { useMutation } from '@apollo/client';
+import { useNavigate } from'react-router-dom';
+import { LOGOUT_USER } from '../utils/userMutations';
+import logo from '../images/flix.png'
+import './Dashboard.css'
 function Dashboard() {
+	const navigate = useNavigate();
+	const [logoutUser] = useMutation(LOGOUT_USER);
+
+	const handleLogout = async (e) => {
+		e.preventDefault();
+
+		try {
+			await logoutUser();
+			localStorage.removeItem('token');
+			navigate('/');
+			window.location.reload();
+		} catch (err) {
+			console.error('Error logging out', err);
+		}
+	}
+
   return (
-    <div>
-      <header className="bg-white shadow">
-        <div className="vw-screen mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-white-50 bg-black-950 rounded-md p-6 overflow-y-scroll">
-            FLIX
-          </h1>
+    <div className="bg-gradient-to-tr from-black-800">
+      <header className="bg-black-950 shadow">
+        <div className="vw-screen mx-auto py-6 px-4 sm:px-6 lg:px-8 justify-between">
+          <div className="flex items-center justify-center">
+            <div className="flex-column">
+              <h1 className="text-9xl font-bold text-white-50 p-6">FLIX</h1>
+              <div className="logo-container border-2 border-white-50">
+                <img
+                  className="h-auto w-auto bg-white-50 border-white-50 border-1"
+                  src={logo}
+                  alt="logo"
+                />
+              </div>
+            </div>
+            <button type="submit" onClick={handleLogout}>
+              LOGOUT
+            </button>
+          </div>
         </div>
       </header>
+
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="px-4 py-6 sm:px-0">
-            <div className="grow h-screen flex flex-row md:ml-24  bg-black-900 text-white-50 text-opacity-80 overflow-y-scroll">
+        <div className="min-w-60% flex-grow mx-auto py-6 sm:px-6 lg:px-8">
+          <div className="flex justify-center sm:px-0">
+            <div className="grow h-screen flex flex-row md:ml-24 bg-black-950 text-white-50 text-opacity-80 overflow-y-scroll w-auto h-auto">
               <YouTubeSearch />
             </div>
           </div>
@@ -56,12 +89,12 @@ function YouTubeSearch() {
   };
 
   return (
-    <div className="grow h-screen flex flex-row flex-wrap md:ml-24 m-default py-5 px-5 bg-black-900 text-gray-700 text-opacity-80 justify-between w-full">
-      <form className="justify-center" onSubmit={handleSubmit}>
-        <input type="text" value={searchQuery} onChange={handleChange} />
-        <button className="rounded-m bg-black-400" type="submit">Search</button>
+<div className="grow h-screen w-auto flex-wrap flex-col md:ml-24 m-default py-5 px-5 bg-black-950 text-white-50 text-opacity-80 justify-center">
+  <form className="" onSubmit={handleSubmit}>
+        <input type="text" className="rounded-md w-2/3 text-white-50 border-2 ml-20 mt-10 mb-4 bg-transparent"value={searchQuery} onChange={handleChange} />
+        <button className="rounded-m bg-black-800 border-white-50 border-2 border-opacity-50" type="submit">Search</button>
       </form>
-      <div className={`w-1/2 flex flex-col text-black-950 transition-all duration-500 ${selectedVideo ? 'hidden' : 'block'}`}>
+      <div className={`w-auto flex flex-col text-white-50 transition-all duration-500 ${selectedVideo ? 'hidden' : 'block'}`}>
         {videos.map((video) => (
           <div key={video.id.videoId} onClick={() => handleVideoSelect(video.id.videoId)}>
             <h2>{video.snippet.title}</h2>
@@ -69,7 +102,7 @@ function YouTubeSearch() {
           </div>
         ))}
       </div>
-      <div className={`w-full transition-all duration-500 ${selectedVideo ? 'block' : 'hidden'}`}>
+      <div className={`w-full h-full transition-all duration-500 ${selectedVideo ? 'block' : 'hidden'}`}>
         {selectedVideo && (
           <div className="w-full h-full justify-self-center align-self-center">
             <iframe

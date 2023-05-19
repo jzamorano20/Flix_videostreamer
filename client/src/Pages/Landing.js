@@ -35,29 +35,39 @@ function Landing() {
     <div className="min-h-screen w-full bg-gradient-to-tr from-black-800 to-white-50 text-white-50">
       <nav className="bg-gray-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-center h-16">
             <div className="flex items-center">
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <img className="h-8 w-8 bg-white-50" src={logo} alt="logo" />
                   <a
                     href="/"
-                    className="text-white-50 hover:bg-white-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white-50 hover:bg-white-50 hover:text-black-900 px-3 py-2 rounded-md text-sm font-medium"
                   >
                     HOME
                   </a>
                   <a
                     href="/login"
-                    className="text-white-50 hover:bg-white-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white-50 hover:bg-white-50 hover:text-black-900 px-3 py-2 rounded-md text-sm font-medium"
                   >
                     LOGIN
                   </a>
                   <a
                     href="/register"
-                    className="text-white-50 hover:bg-white-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-white-50 hover:bg-white-50 hover:text-black-900 px-3 py-2 rounded-md text-sm font-medium"
                   >
                     REGISTER
                   </a>
+									<a
+									href='/dashboard'
+									className='text-white-50 hover:bg-white-50 hover:text-black-900 px-3 py-2 rounded-md text-sm font-medium'>
+										DASH
+									</a>
+									<a
+										href="/favorites"
+										className="text-white-50 hover:bg-white-50 hover:text-black-900 px-3 py-2">
+										FAVORITES
+									</a>
                 </div>
               </div>
             </div>

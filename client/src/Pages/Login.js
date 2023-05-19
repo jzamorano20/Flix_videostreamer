@@ -1,7 +1,8 @@
 import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../mutations/userMutations";
+import { LOGIN_USER } from "../utils/userMutations";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import verifyToken from "../components/auth";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -18,12 +19,20 @@ function Login() {
       },
     })
       .then((data) => {
+				// const token = data.login.token;
+				// localStorage.setItem('token', token);
+
+				// const decodedToken = verifyToken()
+				// if (decodedToken) {
+				// 	console.log('Token is valid:', decodedToken);
+				// }
         console.log(data);
         navigate("/dashboard");
       })
       .catch((error) => {
         console.error({ error });
       });
+
   };
 
   return (
@@ -61,8 +70,8 @@ function Login() {
         {error && <p className="text-red-500">{error.message}</p>}
         <p class="text-center text-lg">
           No account?
-          <a href="#" className="font-medium text-white-50 underline-offset-4 hover:underline px-1">
-            Create One
+          <a href="/login" className="font-medium text-white-50 underline-offset-4 hover:underline px-1">
+            CREATE AN ACCOUNT
           </a>
         </p>
       </section>
