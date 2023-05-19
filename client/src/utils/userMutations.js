@@ -22,5 +22,11 @@ const LOGIN_USER = gql`
     }
   `;
 
-
-export { REGISTER_USER, LOGIN_USER };
+const LOGOUT_USER = gql`
+    mutation logoutUser {
+      logoutUser {
+				success,
+				message
+			}
+    }`
+export { REGISTER_USER, LOGIN_USER, LOGOUT_USER };
