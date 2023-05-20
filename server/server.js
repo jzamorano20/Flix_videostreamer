@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3333;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "client", "dist")));
+app.use(express.static(path.join(__dirname, "client", "build")));
 app.use(cors());
 
 db.once("open", () => {
@@ -28,7 +28,7 @@ app.use(
 
 // Added a route to serve the React app
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 app.listen(PORT, () => {
