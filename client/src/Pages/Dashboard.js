@@ -47,7 +47,7 @@ function Dashboard() {
 			<main>
 				<div className="min-w-60% flex-grow mx-auto py-6 sm:px-6 lg:px-8">
 					<div className="flex justify-center sm:px-0">
-						<div className="grow h-screen flex flex-row md:ml-24 bg-black-950 text-white-50 text-opacity-80 overflow-y-scroll w-auto h-auto">
+						<div className="grow flex flex-row md:ml-24 bg-black-950 text-white-50 text-opacity-80 overflow-y-scroll w-auto h-auto">
 							<YouTubeSearch />
 						</div>
 					</div>
