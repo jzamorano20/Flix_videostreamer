@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3333;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("client/dist"));
+app.use(express.static("../client/dist"));
 app.use(cors());
 
 db.once("open", () => {
