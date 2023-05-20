@@ -78,3 +78,7 @@ Landing Page
 Favorites Page
 ![Favorites page](./Assets/favorites.png)
 
+
+## Deployed Site 
+https://flix-videos.herokuapp.com/
+
